@@ -102,7 +102,7 @@ while running:
     clock.tick(snake_speed)
 
 message(font_gameOver, 'Game Over', RED, int(DISPLAY_SIZE[0]/2), int(DISPLAY_SIZE[1]/2))
-message(font_madeBy, 'made by kig2929kig', GRAY, int(DISPLAY_SIZE[0]/2), int(DISPLAY_SIZE[1]/2)+30)
+message(font_madeBy, 'user', GRAY, int(DISPLAY_SIZE[0]/2), int(DISPLAY_SIZE[1]/2)+30)
 pygame.display.update()
 time.sleep(3)
 pygame.quit()
