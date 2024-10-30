@@ -26,14 +26,25 @@ foodx = None
 foody = None
 
 DISPLAY_SIZE = (800,600)
+
 #snake
+snake_tail = 1
 SNAKE_SIZE = 20
 snake_pos_x = DISPLAY_SIZE[0]/2 - SNAKE_SIZE/2
 snake_pos_y = DISPLAY_SIZE[1]/2 - SNAKE_SIZE/2
 snake_pos_x_change = 0
 snake_pos_y_change = 0
+snake_list = []
 snake_speed = 5
 score = 0
+
+def snake(SNAKE_SIZE, snake_list):
+    for pos in snake_list:
+        print(pos)
+        pygame.draw.rect(screen, RED, \
+                         [pos[0], pos[1],
+                          SNAKE_SIZE,
+                          SNAKE_SIZE])
 
 #color
 RED = (255,0,0); GREEN = (0,255,0)
@@ -77,10 +88,17 @@ while running:
             
     snake_pos_x += snake_pos_x_change
     snake_pos_y += snake_pos_y_change
+    snake_head = []
+    snake_head.append(snake_pos_x)
+    snake_head.append(snake_pos_y)
+    snake_list.append(snake_head)
+    print(snake_list)
     screen.fill(WHITE)
     pygame.draw.rect(screen, GRAY, [0,0, DISPLAY_SIZE[0], DISPLAY_SIZE[1]],10)
-    pygame.draw.rect(screen, RED, [snake_pos_x, snake_pos_y, \
-                                   SNAKE_SIZE,SNAKE_SIZE])
+    if len(snake_list) > snake_tail :
+        del snake_list[0]
+    snake(SNAKE_SIZE, snake_list)
+    
     pygame.draw.rect(screen, BLUE, [foodx, foody, SNAKE_SIZE, SNAKE_SIZE])
     message(font_score, "Score : " + str(score), GREEN, DISPLAY_SIZE[0]/2, 30)
     
@@ -94,6 +112,7 @@ while running:
         snake_speed = snake_speed + 1
         score = score + 10
         print(score)
+        snake_tail += 1
         food()
         
         
